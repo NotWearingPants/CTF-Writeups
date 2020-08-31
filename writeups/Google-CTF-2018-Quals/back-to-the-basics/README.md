@@ -490,3 +490,5 @@ I think I've redeemed myself after guessing the flag, back to the BASICs - solve
 ![Entering the Flag](images/solved_flag.png)
 
 This challenge was awesome, I would have never used a Commodore 64 emulator or BASIC code otherwise, thanks Google :)
+
+If you want a peek behind the scenes, you can find Google's source code for this challenge [here](https://github.com/google/google-ctf/tree/master/2018/quals/re-basics/src).
