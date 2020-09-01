@@ -291,7 +291,57 @@ for (auto i = 0; i < 8; i++) {
 std::cout << std::endl;
 ```
 
-Now we get the password: `7LoX%*_x`.
+Here's the complete solution script:
+```cpp
+#include "obj_dir/Vcheck.h"
+
+#include <iostream>
+#include <memory>
+#include <cmath>
+
+static const uint64_t EXPECTED_RESULT = 3008192072309708;
+
+int main(int argc, char *argv[]) {
+    Verilated::commandArgs(argc, argv);
+
+    uint64_t solution = 0;
+
+    for (auto bit = 0; bit < 56; bit++) {
+        uint64_t data = static_cast<uint64_t>(1) << bit;
+
+        auto check = std::make_unique<Vcheck>();
+
+        for (auto i = 0; i < 8; i++) {
+            check->data = (data >> (i * 7)) & 0x7F;
+            check->clk = false;
+            check->eval();
+            check->clk = true;
+            check->eval();
+        }
+
+        auto result = check->kittens;
+        int bitSet = std::log2(result);
+        if (result == 0 || (result & (static_cast<uint64_t>(1) << bitSet)) != result) {
+            std::cout << "error" << std::endl;
+        } else {
+            auto resultBitShouldBeSet = ((EXPECTED_RESULT >> bitSet) & 1) == 1;
+            if (resultBitShouldBeSet) {
+                solution |= static_cast<uint64_t>(1) << bit;
+            }
+        }
+    }
+
+    for (auto i = 0; i < 8; i++) {
+        auto solutionByte = ((solution >> (i * 7)) & 0x7F);
+        std::cout << static_cast<char>(solutionByte);
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+```
+
+Compiling and running it, we get the password: `7LoX%*_x`.
 
 It's printable, that's a good sign.
 I try it locally - it prints `CTF{real flag would be here}`. Great success.
