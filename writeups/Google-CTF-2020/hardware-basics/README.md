@@ -359,4 +359,4 @@ Now let's try the password in the remote interface - we get: `CTF{W4sTh4tASan1ty
 
 This challenge was awesome, I got to learn Verilog and play around with it, and also found a clever solution to a tedious problem.
 
-Did not expect less from a Google CTF challenge.
+Did not expect less from a Google CTF challenge :)
