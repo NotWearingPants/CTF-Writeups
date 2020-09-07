@@ -2,7 +2,7 @@
 
 This task was part of the 'Hardware' category at the 2020 Google CTF (during 22-23 August 2020).
 
-While I don't usually deal with hardware, I know that Google CTFs can be a great opportunity to learn new things, so after having a great time solving [Back to the Basics](../../Google-CTF-2018-Quals/back-to-the-basics) from 2 years ago, I decided to try it.
+While I don't usually deal with hardware, I know that Google CTFs can be a great opportunity to learn new things, so after having a great time solving [Back to the Basics](../../Google-CTF-2018-Quals/back-to-the-basics) from 2 years ago, I decided to try the challenge that was tagged "easy".
 
 ## The Challenge
 
@@ -69,7 +69,9 @@ So we're dealing with a Verilog simulator, so I guess this other file that we go
 
 I'm still not sure about this since the namespace that the C++ code uses is called `Verilated` and not `Verilator` which are different libraries, but maybe the Rust library got its name from that namespace.
 
-Now that I think about it, the second file's name - `check.sv` - reminds me of the header `Vcheck.h`. Maybe they used this Verilator thing to generate that header from the `sv` file to connect it to C++! That sounds plausible.
+Now that I think about it, the second file's name - `check.sv` - reminds me of the header `Vcheck.h`.
+So Maybe they used this Verilator thing to generate that header from the `sv` file to connect it to C++!
+Sounds plausible.
 
 ## Exploring (Verilog)
 
@@ -110,6 +112,9 @@ Scanning the code briefly, I see the name `open_safe` which I recognize from the
 This must mean that using Verilator this Verilog file was connected to the C++ file, which feeds it input until `open_safe` is `true` as we saw before.
 
 As I said, I don't know anything about Verilog or about how it works, so all I can do now is try to use knowledge of how programming works in general to try and make sense of the code.
+
+I also wonder what does this file extension stand for (`sv`).
+Googling it, it seems to be something called "System Verilog", that checks out I guess 🤷‍♂️
 
 ## Understanding
 
@@ -341,12 +346,12 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-Compiling and running it, we get the password: `7LoX%*_x`.
+Compiling with Verilator and running it, we get the password: `7LoX%*_x`.
 
 It's printable, that's a good sign.
-I try it locally - it prints `CTF{real flag would be here}`. Great success.
+Trying it locally, it prints `CTF{real flag would be here}`. Great success.
 
-Now I try the password in the remote interface, and get: `CTF{W4sTh4tASan1tyCh3ck?}`
+Now let's try the password in the remote interface - we get: `CTF{W4sTh4tASan1tyCh3ck?}`
 
 ## We win!
 
