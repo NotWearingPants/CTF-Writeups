@@ -252,7 +252,7 @@ So I added `kittens` to there (`output wire kittens`), and it worked - I got the
 There's only one thing I didn't understand in the Verilog code, which is how is the `idx` variable, which is only a 3-bit variable, being incremented by 5, results in the indices 0..7 to the `memory` array?
 I added it to the outputs as well and printed it in the input loop.
 It printed `0, 5, 2, 7, 4, 1, 6, 3`. So it turns out I was right about it being a 3-bit value, but it looks like it overflows and adding 5 to it each time actually goes through the indices 0..7 not in order and without repeats.
-This means that if I tried to follow the bits myself, I wouldn't have noticed this shuffle exists, and would have gotten the password shuffled and would probably debug my script for hours without finding the problem.
+This means that if I tried to follow the bits myself, I wouldn't have noticed that this shuffle exists, and would have gotten the password shuffled and would probably debug my script for hours without finding the problem.
 
 Let's keep going.
 I don't think it would be trivial to connect the compiled program to a Python script to run it and go through all of the bits, so instead let's stay in C++, it would also make the bit-twiddling a bit easier (pun intended).
